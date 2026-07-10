@@ -101,12 +101,11 @@
           </div>
 
           <div class="form-group">
-            <label for="template">Template</label>
-            <select id="template">
-              <option value="classic-gold">Classic Gold</option>
-              <option value="baby-pink">Baby Pink</option>
-              <option value="baby-blue">Baby Blue</option>
-            </select>
+            <label>Template</label>
+            <div class="template-picker" id="templatePicker">
+              <div class="template-loading">A carregar templates...</div>
+            </div>
+            <input type="hidden" id="template" value="classic-gold">
           </div>
 
           <button type="submit" class="btn-submit" id="submitBtn">

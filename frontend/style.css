@@ -238,6 +238,79 @@ input:focus, select:focus {
   color: white;
 }
 
+.template-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.template-loading {
+  color: #a09080;
+  font-size: 0.9rem;
+  padding: 10px 0;
+}
+
+.template-category-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #7a6a5a;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 6px 0 4px;
+  padding-top: 8px;
+  border-top: 1px solid #f0e6d3;
+}
+
+.template-category-label:first-child {
+  border-top: none;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.template-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.template-card {
+  border: 2px solid #e8ddd0;
+  border-radius: 12px;
+  padding: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+}
+
+.template-card:hover {
+  border-color: #c9a84c;
+  background: #fdfaf7;
+}
+
+.template-card.active {
+  border-color: #c9a84c;
+  background: #fdf6e8;
+  box-shadow: 0 0 0 1px #c9a84c;
+}
+
+.template-card .template-name {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #2c1810;
+}
+
+.template-card .template-orientation {
+  font-size: 0.7rem;
+  color: #a09080;
+  margin-top: 2px;
+}
+
+.template-card .template-dimensions {
+  font-size: 0.65rem;
+  color: #c0b0a0;
+  margin-top: 1px;
+}
+
 @media (max-width: 900px) {
   .layout {
     grid-template-columns: 1fr;

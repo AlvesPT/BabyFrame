@@ -1,0 +1,147 @@
+{
+  "template": {
+    "id": "landscape-split",
+    "category": "baby",
+    "layout": "horizontal",
+    "name": "Landscape Split",
+    "size": {
+      "width": 4960,
+      "height": 3508
+    },
+    "canvas": { "width": 1000, "height": 707 },
+    "orientation": "landscape",
+    "backgroundColor": "#f0f8ff",
+    "colors": {
+      "primary": "#4a7c9e",
+      "secondary": "#7bb8d4",
+      "accent": "#ffd966",
+      "text": "#1a3a4a",
+      "background": "#f0f8ff"
+    },
+    "fonts": {
+      "title": "Great Vibes, cursive",
+      "name": "Great Vibes, cursive",
+      "subtitle": "Playfair Display, serif",
+      "body": "Cormorant Garamond, serif",
+      "numbers": "Cinzel, serif"
+    },
+    "components": [
+      {
+        "type": "baby_photo",
+        "label": "photo",
+        "x": 550, "y": 71,
+        "width": 420, "height": 566,
+        "borderRadius": 30,
+        "borderWidth": 4,
+        "borderStyle": "solid",
+        "borderColor": "#4a7c9e"
+      },
+      {
+        "type": "baby_name",
+        "field": "baby_name",
+        "x": 45, "y": 50,
+        "width": 550, "height": 113,
+        "fontFamily": "title",
+        "fontSize": 56,
+        "color": "text",
+        "textAlign": "left"
+      },
+      {
+        "type": "title",
+        "field": "title",
+        "x": 45, "y": 160,
+        "width": 550, "height": 50,
+        "text": "Certidão de Nascimento",
+        "fontFamily": "title",
+        "fontSize": 36,
+        "color": "primary",
+        "textAlign": "left"
+      },
+      {
+        "type": "data_card",
+        "label": "Data",
+        "field": "birth_date",
+        "x": 40, "y": 219,
+        "width": 200, "height": 156,
+        "icon": "calendar",
+        "fontFamily": "numbers",
+        "fontSize": 36,
+        "color": "text",
+        "textAlign": "center",
+        "boxStyle": "rounded"
+      },
+      {
+        "type": "data_card",
+        "label": "Hora",
+        "field": "birth_time",
+        "x": 260, "y": 219,
+        "width": 160, "height": 156,
+        "icon": "clock",
+        "fontFamily": "numbers",
+        "fontSize": 36,
+        "color": "text",
+        "textAlign": "center",
+        "boxStyle": "rounded"
+      },
+      {
+        "type": "data_card",
+        "label": "Altura",
+        "field": "height",
+        "x": 440, "y": 219,
+        "width": 140, "height": 156,
+        "icon": "ruler",
+        "fontFamily": "numbers",
+        "fontSize": 36,
+        "color": "text",
+        "textAlign": "center",
+        "boxStyle": "rounded"
+      },
+      {
+        "type": "data_card",
+        "label": "Peso",
+        "field": "weight",
+        "x": 40, "y": 396,
+        "width": 200, "height": 127,
+        "icon": "scale",
+        "fontFamily": "numbers",
+        "fontSize": 36,
+        "color": "text",
+        "textAlign": "center",
+        "boxStyle": "rounded"
+      },
+      {
+        "type": "hospital_badge",
+        "label": "Hospital",
+        "field": "hospital",
+        "x": 450, "y": 396,
+        "width": 140, "height": 127,
+        "fontFamily": "body",
+        "fontSize": 18,
+        "color": "text",
+        "textAlign": "center",
+        "icon": "heart"
+      },
+      {
+        "type": "parents_box",
+        "x": 90, "y": 509,
+        "width": 500, "height": 141,
+        "fields": ["mother", "father"],
+        "fontFamily": "body",
+        "fontSize": 24,
+        "color": "text",
+        "textAlign": "left",
+        "boxStyle": "solid"
+      },
+      {
+        "type": "doctor",
+        "field": "doctor",
+        "x": 90, "y": 650,
+        "width": 500, "height": 30,
+        "fontFamily": "body",
+        "fontSize": 18,
+        "color": "text",
+        "textAlign": "left"
+      }
+    ]
+  }
+}

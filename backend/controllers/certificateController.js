@@ -111,16 +111,7 @@ async function download(req, res) {
 
 async function getTemplates(req, res) {
   try {
-    const templatesDir = config.paths.templates;
-    const files = fs.readdirSync(templatesDir).filter(f => f.endsWith('.json'));
-    const templates = files.map(f => {
-      const raw = JSON.parse(fs.readFileSync(path.join(templatesDir, f), 'utf-8'));
-      return {
-        name: raw.template.name,
-        fileName: f.replace('.json', ''),
-        size: raw.template.size,
-      };
-    });
+    const templates = await imageGenerator.listTemplates();
     res.json({ success: true, data: templates });
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });

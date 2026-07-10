@@ -9,8 +9,11 @@ const previewEmpty = document.getElementById('previewEmpty');
 const previewContent = document.getElementById('previewContent');
 const resultCard = document.getElementById('resultCard');
 const downloadButtons = document.getElementById('downloadButtons');
+const templatePicker = document.getElementById('templatePicker');
+const templateInput = document.getElementById('template');
 
 let selectedFile = null;
+let templatesData = [];
 
 photoInput.addEventListener('change', (e) => {
   const file = e.target.files[0];
@@ -59,7 +62,7 @@ form.addEventListener('submit', async (e) => {
     formData.append('mother', document.getElementById('mother').value);
     formData.append('father', document.getElementById('father').value);
     formData.append('sign', document.getElementById('sign').value);
-    formData.append('template', document.getElementById('template').value);
+    formData.append('template', templateInput.value);
 
     const response = await fetch('/api/certificates', { method: 'POST', body: formData });
     const result = await response.json();
@@ -103,10 +106,14 @@ function updatePreview() {
   previewEmpty.style.display = 'none';
   previewContent.style.display = 'block';
 
+  const selectedTpl = templatesData.find(t => t.id === templateInput.value);
+  const isLandscape = selectedTpl && selectedTpl.orientation === 'landscape';
+  const bgColor = '#faf6f0';
+
   previewContent.innerHTML = `
-    <div style="background:#faf6f0; border-radius:8px; padding:20px; font-family:Georgia,serif;">
-      <div style="display:flex; gap:15px;">
-        <div style="width:120px; height:160px; background:#e8ddd0; border-radius:8px; overflow:hidden; flex-shrink:0;">
+    <div style="background:${bgColor}; border-radius:8px; padding:20px; font-family:Georgia,serif; ${isLandscape ? 'max-width:100%;' : ''}">
+      <div style="display:flex; gap:15px; ${isLandscape ? 'flex-direction:column;' : ''}">
+        <div style="width:${isLandscape ? '100%' : '120px'}; height:${isLandscape ? '120px' : '160px'}; background:#e8ddd0; border-radius:8px; overflow:hidden; flex-shrink:0;">
           ${selectedFile ? `<img src="${previewImg.src}" style="width:100%;height:100%;object-fit:cover;">` : '<div style="padding:60px 20px;text-align:center;color:#a09080;">Foto</div>'}
         </div>
         <div style="flex:1;">
@@ -131,3 +138,56 @@ function updatePreview() {
     </div>
   `;
 }
+
+async function loadTemplates() {
+  try {
+    const response = await fetch('/api/certificates/templates');
+    const result = await response.json();
+    if (!result.success) throw new Error(result.error);
+    templatesData = result.data;
+    renderTemplates(result.data);
+  } catch (err) {
+    templatePicker.innerHTML = '<div class="template-loading">Erro ao carregar templates</div>';
+  }
+}
+
+function renderTemplates(templates) {
+  const categories = {};
+  templates.forEach(t => {
+    const cat = t.category || 'geral';
+    if (!categories[cat]) categories[cat] = [];
+    categories[cat].push(t);
+  });
+
+  let html = '';
+  Object.entries(categories).forEach(([cat, tmpls]) => {
+    html += `<div class="template-category-label">${cat}</div>`;
+    html += '<div class="template-grid">';
+    tmpls.forEach(t => {
+      const active = t.id === templateInput.value ? ' active' : '';
+      const orientation = t.orientation === 'portrait' ? 'Vertical' : 'Horizontal';
+      const dims = t.size ? `${Math.round(t.size.width/100)}×${Math.round(t.size.height/100)} cm` : '';
+      html += `
+        <div class="template-card${active}" data-id="${t.id}">
+          <div class="template-name">${t.name}</div>
+          <div class="template-orientation">${orientation}</div>
+          <div class="template-dimensions">${dims}</div>
+        </div>
+      `;
+    });
+    html += '</div>';
+  });
+
+  templatePicker.innerHTML = html;
+
+  templatePicker.querySelectorAll('.template-card').forEach(card => {
+    card.addEventListener('click', () => {
+      templatePicker.querySelectorAll('.template-card').forEach(c => c.classList.remove('active'));
+      card.classList.add('active');
+      templateInput.value = card.dataset.id;
+      updatePreview();
+    });
+  });
+}
+
+loadTemplates();
