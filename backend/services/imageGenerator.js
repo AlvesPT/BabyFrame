@@ -33,7 +33,12 @@ function loadSvgIcon(iconName) {
 }
 
 function scaleVal(val, scaleX, scaleY) {
-  return { x: Math.round(val.x * scaleX), y: Math.round(val.y * scaleY) };
+  const result = {};
+  if (val.x !== undefined) result.x = Math.round(val.x * scaleX);
+  if (val.y !== undefined) result.y = Math.round(val.y * scaleY);
+  if (val.width !== undefined) result.width = Math.round(val.width * scaleX);
+  if (val.height !== undefined) result.height = Math.round(val.height * scaleY);
+  return result;
 }
 
 function buildHtmlComponents(tpl, data) {
@@ -370,4 +375,4 @@ async function listTemplates() {
   return results;
 }
 
-module.exports = { generate, generateFromTemplate, buildHtml, listTemplates };
+module.exports = { generate, generateFromTemplate, buildHtml, findTemplateConfig, listTemplates };

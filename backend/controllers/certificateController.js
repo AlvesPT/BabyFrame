@@ -109,6 +109,38 @@ async function download(req, res) {
   }
 }
 
+async function preview(req, res) {
+  try {
+    const body = req.body;
+    const templateName = body.template || 'classic-gold';
+    const photo = body.photo || '';
+
+    const data = {
+      id: 'preview',
+      baby_name: body.baby_name || '',
+      birth_date: body.birth_date || '',
+      birth_time: body.birth_time || '',
+      weight: body.weight || '',
+      height: body.height || '',
+      hospital: body.hospital || '',
+      doctor: body.doctor || '',
+      mother: body.mother || '',
+      father: body.father || '',
+      sign: body.sign || '',
+      photo: photo,
+      template: templateName,
+    };
+
+    const templateConfig = imageGenerator.findTemplateConfig(templateName);
+    const html = imageGenerator.buildHtml(templateConfig.template, data);
+
+    res.setHeader('Content-Type', 'text/html; charset=utf-8');
+    res.send(html);
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+}
+
 async function getTemplates(req, res) {
   try {
     const templates = await imageGenerator.listTemplates();
@@ -118,4 +150,4 @@ async function getTemplates(req, res) {
   }
 }
 
-module.exports = { create, list, getById, download, getTemplates };
+module.exports = { create, list, getById, download, preview, getTemplates };

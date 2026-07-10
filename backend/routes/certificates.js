@@ -27,6 +27,7 @@ const upload = multer({
 const router = express.Router();
 
 router.post('/', upload.single('photo'), controller.create);
+router.post('/preview', controller.preview);
 router.get('/', controller.list);
 router.get('/templates', controller.getTemplates);
 router.get('/:id', controller.getById);

@@ -6,14 +6,17 @@ const removePhotoBtn = document.getElementById('removePhoto');
 const photoUpload = document.getElementById('photoUpload');
 const submitBtn = document.getElementById('submitBtn');
 const previewEmpty = document.getElementById('previewEmpty');
-const previewContent = document.getElementById('previewContent');
+const previewFrameWrap = document.getElementById('previewFrameWrap');
+const previewFrame = document.getElementById('previewFrame');
 const resultCard = document.getElementById('resultCard');
 const downloadButtons = document.getElementById('downloadButtons');
 const templatePicker = document.getElementById('templatePicker');
 const templateInput = document.getElementById('template');
 
 let selectedFile = null;
+let photoBase64 = '';
 let templatesData = [];
+let previewTimeout = null;
 
 photoInput.addEventListener('change', (e) => {
   const file = e.target.files[0];
@@ -21,20 +24,22 @@ photoInput.addEventListener('change', (e) => {
   selectedFile = file;
   const reader = new FileReader();
   reader.onload = (ev) => {
-    previewImg.src = ev.target.result;
+    photoBase64 = ev.target.result;
+    previewImg.src = photoBase64;
     photoPreview.style.display = 'block';
     photoUpload.querySelector('.upload-placeholder').style.display = 'none';
+    schedulePreview();
   };
   reader.readAsDataURL(file);
-  updatePreview();
 });
 
 removePhotoBtn.addEventListener('click', () => {
   selectedFile = null;
+  photoBase64 = '';
   photoInput.value = '';
   photoPreview.style.display = 'none';
   photoUpload.querySelector('.upload-placeholder').style.display = 'flex';
-  previewContent.style.display = 'none';
+  previewFrameWrap.style.display = 'none';
   previewEmpty.style.display = 'block';
 });
 
@@ -92,52 +97,87 @@ form.addEventListener('submit', async (e) => {
 });
 
 const formInputs = form.querySelectorAll('input, select');
-formInputs.forEach(el => el.addEventListener('input', updatePreview));
-formInputs.forEach(el => el.addEventListener('change', updatePreview));
+formInputs.forEach(el => el.addEventListener('input', schedulePreview));
+formInputs.forEach(el => el.addEventListener('change', schedulePreview));
 
-function updatePreview() {
-  const hasAnyField = Array.from(formInputs).some(i => i.value);
-  if (!hasAnyField && !selectedFile) {
+function schedulePreview() {
+  if (previewTimeout) clearTimeout(previewTimeout);
+  previewTimeout = setTimeout(fetchPreview, 300);
+}
+
+function getFormData() {
+  return {
+    baby_name: document.getElementById('baby_name').value,
+    birth_date: document.getElementById('birth_date').value,
+    birth_time: document.getElementById('birth_time').value,
+    weight: document.getElementById('weight').value,
+    height: document.getElementById('height').value,
+    hospital: document.getElementById('hospital').value,
+    doctor: document.getElementById('doctor').value,
+    mother: document.getElementById('mother').value,
+    father: document.getElementById('father').value,
+    sign: document.getElementById('sign').value,
+    template: templateInput.value,
+    photo: photoBase64,
+  };
+}
+
+async function fetchPreview() {
+  const data = getFormData();
+
+  const hasContent = data.baby_name || data.birth_date || data.weight || data.photo;
+  if (!hasContent) {
+    previewFrameWrap.style.display = 'none';
     previewEmpty.style.display = 'block';
-    previewContent.style.display = 'none';
     return;
   }
 
   previewEmpty.style.display = 'none';
-  previewContent.style.display = 'block';
+  previewFrameWrap.style.display = 'block';
 
-  const selectedTpl = templatesData.find(t => t.id === templateInput.value);
-  const isLandscape = selectedTpl && selectedTpl.orientation === 'landscape';
-  const bgColor = '#faf6f0';
+  try {
+    const response = await fetch('/api/certificates/preview', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
 
-  previewContent.innerHTML = `
-    <div style="background:${bgColor}; border-radius:8px; padding:20px; font-family:Georgia,serif; ${isLandscape ? 'max-width:100%;' : ''}">
-      <div style="display:flex; gap:15px; ${isLandscape ? 'flex-direction:column;' : ''}">
-        <div style="width:${isLandscape ? '100%' : '120px'}; height:${isLandscape ? '120px' : '160px'}; background:#e8ddd0; border-radius:8px; overflow:hidden; flex-shrink:0;">
-          ${selectedFile ? `<img src="${previewImg.src}" style="width:100%;height:100%;object-fit:cover;">` : '<div style="padding:60px 20px;text-align:center;color:#a09080;">Foto</div>'}
-        </div>
-        <div style="flex:1;">
-          <div style="font-family:'Great Vibes',cursive;font-size:1.5rem;color:#c9a84c;">Certidão de Nascimento</div>
-          <div style="font-size:1.2rem;margin-top:8px;"><strong>${document.getElementById('baby_name').value || 'Nome do Bebé'}</strong></div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:10px;font-size:0.85rem;">
-            <span>Data: ${document.getElementById('birth_date').value || '—'}</span>
-            <span>Hora: ${document.getElementById('birth_time').value || '—'}</span>
-            <span>Peso: ${document.getElementById('weight').value || '—'}</span>
-            <span>Altura: ${document.getElementById('height').value || '—'}</span>
-          </div>
-          <div style="margin-top:8px;font-size:0.85rem;">
-            <div>${document.getElementById('hospital').value || 'Hospital'}</div>
-            <div>Dr(a): ${document.getElementById('doctor').value || '—'}</div>
-          </div>
-          <div style="margin-top:8px;font-size:0.85rem;border-top:1px solid #e8ddd0;padding-top:8px;">
-            <div>Mãe: ${document.getElementById('mother').value || '—'}</div>
-            <div>Pai: ${document.getElementById('father').value || '—'}</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  `;
+    if (!response.ok) throw new Error('Preview failed');
+    const html = await response.text();
+    previewFrame.srcdoc = html;
+
+    previewFrame.onload = () => {
+      scalePreviewFrame();
+    };
+  } catch {
+    previewFrameWrap.style.display = 'none';
+    previewEmpty.style.display = 'block';
+    previewEmpty.innerHTML = '<p>Erro ao gerar pré-visualização</p>';
+  }
 }
+
+function scalePreviewFrame() {
+  const selectedTpl = templatesData.find(t => t.id === templateInput.value);
+  if (!selectedTpl || !selectedTpl.size) return;
+
+  const tplW = selectedTpl.size.width;
+  const tplH = selectedTpl.size.height;
+  const containerW = previewFrameWrap.clientWidth;
+
+  const scale = containerW / tplW;
+
+  previewFrame.style.width = tplW + 'px';
+  previewFrame.style.height = tplH + 'px';
+  previewFrame.style.transform = 'scale(' + scale + ')';
+  previewFrame.style.transformOrigin = 'top left';
+  previewFrameWrap.style.height = Math.round(tplH * scale) + 'px';
+}
+
+window.addEventListener('resize', () => {
+  if (previewFrameWrap.style.display !== 'none') {
+    scalePreviewFrame();
+  }
+});
 
 async function loadTemplates() {
   try {
@@ -185,7 +225,7 @@ function renderTemplates(templates) {
       templatePicker.querySelectorAll('.template-card').forEach(c => c.classList.remove('active'));
       card.classList.add('active');
       templateInput.value = card.dataset.id;
-      updatePreview();
+      schedulePreview();
     });
   });
 }
