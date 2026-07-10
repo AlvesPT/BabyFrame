@@ -144,33 +144,26 @@ async function fetchPreview() {
 
     if (!response.ok) throw new Error('Preview failed');
     const html = await response.text();
-    previewFrame.srcdoc = html;
 
-    previewFrame.onload = () => {
-      scalePreviewFrame();
-    };
+    const selectedTpl = templatesData.find(t => t.id === templateInput.value);
+    const tplW = selectedTpl ? selectedTpl.size.width : 3508;
+    const tplH = selectedTpl ? selectedTpl.size.height : 2480;
+    const containerW = previewFrameWrap.clientWidth || 400;
+
+    const scale = containerW / tplW;
+    const scaledH = Math.round(tplH * scale);
+
+    previewFrame.style.width = tplW + 'px';
+    previewFrame.style.height = tplH + 'px';
+    previewFrame.style.transform = 'scale(' + scale + ')';
+    previewFrameWrap.style.height = scaledH + 'px';
+
+    previewFrame.srcdoc = html;
   } catch {
     previewFrameWrap.style.display = 'none';
     previewEmpty.style.display = 'block';
     previewEmpty.innerHTML = '<p>Erro ao gerar pré-visualização</p>';
   }
-}
-
-function scalePreviewFrame() {
-  const selectedTpl = templatesData.find(t => t.id === templateInput.value);
-  if (!selectedTpl || !selectedTpl.size) return;
-
-  const tplW = selectedTpl.size.width;
-  const tplH = selectedTpl.size.height;
-  const containerW = previewFrameWrap.clientWidth;
-
-  const scale = containerW / tplW;
-
-  previewFrame.style.width = tplW + 'px';
-  previewFrame.style.height = tplH + 'px';
-  previewFrame.style.transform = 'scale(' + scale + ')';
-  previewFrame.style.transformOrigin = 'top left';
-  previewFrameWrap.style.height = Math.round(tplH * scale) + 'px';
 }
 
 window.addEventListener('resize', () => {

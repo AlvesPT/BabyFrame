@@ -210,13 +210,14 @@ input:focus, select:focus {
   overflow: hidden;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  background: #f5f0eb;
+  position: relative;
 }
 
 .preview-frame {
-  width: 100%;
   border: none;
-  transform-origin: top left;
-  transition: height 0.2s;
+  display: block;
+  transform-origin: 0 0;
 }
 
 .download-buttons {
