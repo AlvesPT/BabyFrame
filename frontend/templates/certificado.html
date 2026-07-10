@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Certidão — {{baby_name}}</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <style>
+    @page { margin: 0; size: 3508px 2480px; }
+    body {
+      margin: 0;
+      width: 3508px;
+      height: 2480px;
+      background: #faf6f0;
+      position: relative;
+      overflow: hidden;
+      font-family: Georgia, serif;
+    }
+    .photo {
+      position: absolute;
+      left: 120px; top: 90px;
+      width: 1250px; height: 1800px;
+      object-fit: cover;
+      border-radius: 20px;
+      border: 4px solid #c9a84c;
+    }
+    .title {
+      position: absolute;
+      left: 2050px; top: 160px;
+      font-family: 'Great Vibes', cursive;
+      font-size: 72px;
+      color: #c9a84c;
+    }
+    .field { position: absolute; }
+  </style>
+</head>
+<body>
+  <img class="photo" src="{{photo}}" alt="Foto">
+  <div class="title">Certidão de Nascimento</div>
+  <div class="field" style="left:180px;top:2100px;font-family:'Great Vibes',cursive;font-size:64px;">{{baby_name}}</div>
+  <div class="field" style="left:1850px;top:550px;font-size:80px;">{{birth_date}}</div>
+  <div class="field" style="left:1840px;top:1460px;font-size:62px;">{{birth_time}}</div>
+  <div class="field" style="left:2550px;top:620px;font-size:72px;">{{weight}}</div>
+  <div class="field" style="left:3250px;top:620px;font-size:72px;">{{height}}</div>
+  <div class="field" style="left:2550px;top:1480px;font-size:42px;">{{hospital}}</div>
+  <div class="field" style="left:3250px;top:1480px;font-size:42px;">{{doctor}}</div>
+  <div class="field" style="left:2600px;top:2240px;font-size:56px;">{{mother}}</div>
+  <div class="field" style="left:2600px;top:2340px;font-size:56px;">{{father}}</div>
+  <div class="field" style="left:500px;top:2380px;font-size:40px;">{{sign}}</div>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Baby Frame — Certidão de Nascimento</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Baby Frame</h1>
+      <p>Gerador de Certidões de Nascimento</p>
+    </header>
+
+    <div class="layout">
+      <div class="form-section">
+        <form id="certificateForm">
+          <div class="form-group">
+            <label for="photo">Foto do Bebé</label>
+            <div class="photo-upload" id="photoUpload">
+              <input type="file" id="photo" accept="image/*" required>
+              <div class="upload-placeholder">
+                <span class="upload-icon">+</span>
+                <span>Clique para enviar foto</span>
+              </div>
+              <div class="photo-preview" id="photoPreview" style="display:none">
+                <img id="previewImg" alt="Preview">
+                <button type="button" class="remove-photo" id="removePhoto">&times;</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="baby_name">Nome do Bebé</label>
+              <input type="text" id="baby_name" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="birth_date">Data de Nascimento</label>
+              <input type="date" id="birth_date" required>
+            </div>
+            <div class="form-group">
+              <label for="birth_time">Hora</label>
+              <input type="time" id="birth_time" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="weight">Peso</label>
+              <input type="text" id="weight" placeholder="Ex: 3.700 Kg" required>
+            </div>
+            <div class="form-group">
+              <label for="height">Altura</label>
+              <input type="text" id="height" placeholder="Ex: 49 cm" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="hospital">Clínica / Hospital</label>
+            <input type="text" id="hospital" required>
+          </div>
+
+          <div class="form-group">
+            <label for="doctor">Obstetra / Médico</label>
+            <input type="text" id="doctor" required>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="mother">Nome da Mãe</label>
+              <input type="text" id="mother" required>
+            </div>
+            <div class="form-group">
+              <label for="father">Nome do Pai</label>
+              <input type="text" id="father" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="sign">Signo</label>
+            <select id="sign">
+              <option value="">Selecionar</option>
+              <option value="Aquário">Aquário</option>
+              <option value="Peixes">Peixes</option>
+              <option value="Carneiro">Carneiro</option>
+              <option value="Touro">Touro</option>
+              <option value="Gémeos">Gémeos</option>
+              <option value="Caranguejo">Caranguejo</option>
+              <option value="Leão">Leão</option>
+              <option value="Virgem">Virgem</option>
+              <option value="Balança">Balança</option>
+              <option value="Escorpião">Escorpião</option>
+              <option value="Sagitário">Sagitário</option>
+              <option value="Capricórnio">Capricórnio</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="template">Template</label>
+            <select id="template">
+              <option value="classic-gold">Classic Gold</option>
+              <option value="baby-pink">Baby Pink</option>
+              <option value="baby-blue">Baby Blue</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn-submit" id="submitBtn">
+            <span class="btn-text">Gerar Certidão</span>
+            <span class="btn-loading" style="display:none">A gerar...</span>
+          </button>
+        </form>
+      </div>
+
+      <div class="preview-section">
+        <div class="preview-card">
+          <h3>Pré-visualização</h3>
+          <div class="preview-empty" id="previewEmpty">
+            <p>Preencha o formulário para ver a pré-visualização</p>
+          </div>
+          <div class="preview-content" id="previewContent" style="display:none"></div>
+        </div>
+
+        <div class="result-card" id="resultCard" style="display:none">
+          <h3>Certidão Gerada</h3>
+          <div class="download-buttons" id="downloadButtons"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

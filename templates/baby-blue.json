@@ -1,0 +1,99 @@
+{
+  "template": {
+    "name": "Baby Blue",
+    "size": {
+      "width": 3508,
+      "height": 2480
+    },
+    "backgroundColor": "#f0f8ff",
+    "photo": {
+      "x": 120,
+      "y": 90,
+      "width": 1250,
+      "height": 1800,
+      "borderRadius": 40,
+      "borderWidth": 3,
+      "borderStyle": "dashed",
+      "borderColor": "#7bb8d4"
+    },
+    "fields": {
+      "title": {
+        "x": 2050,
+        "y": 160,
+        "fontFamily": "Great Vibes, cursive",
+        "fontSize": 72,
+        "color": "#4a7c9e"
+      },
+      "baby_name": {
+        "x": 180,
+        "y": 2100,
+        "fontFamily": "Great Vibes, cursive",
+        "fontSize": 64,
+        "color": "#1a3a4a"
+      },
+      "birth_date": {
+        "x": 1850,
+        "y": 550,
+        "fontFamily": "Georgia, serif",
+        "fontSize": 80,
+        "color": "#1a3a4a"
+      },
+      "birth_time": {
+        "x": 1840,
+        "y": 1460,
+        "fontFamily": "Georgia, serif",
+        "fontSize": 62,
+        "color": "#1a3a4a"
+      },
+      "weight": {
+        "x": 2550,
+        "y": 620,
+        "fontFamily": "Georgia, serif",
+        "fontSize": 72,
+        "color": "#1a3a4a"
+      },
+      "height": {
+        "x": 3250,
+        "y": 620,
+        "fontFamily": "Georgia, serif",
+        "fontSize": 72,
+        "color": "#1a3a4a"
+      },
+      "hospital": {
+        "x": 2550,
+        "y": 1480,
+        "fontFamily": "Georgia, serif",
+        "fontSize": 42,
+        "color": "#1a3a4a"
+      },
+      "doctor": {
+        "x": 3250,
+        "y": 1480,
+        "fontFamily": "Georgia, serif",
+        "fontSize": 42,
+        "color": "#1a3a4a"
+      },
+      "mother": {
+        "x": 2600,
+        "y": 2240,
+        "fontFamily": "Georgia, serif",
+        "fontSize": 56,
+        "color": "#1a3a4a"
+      },
+      "father": {
+        "x": 2600,
+        "y": 2340,
+        "fontFamily": "Georgia, serif",
+        "fontSize": 56,
+        "color": "#1a3a4a"
+      },
+      "sign": {
+        "x": 500,
+        "y": 2380,
+        "fontFamily": "Georgia, serif",
+        "fontSize": 40,
+        "color": "#1a3a4a"
+      }
+    }
+  }
+}

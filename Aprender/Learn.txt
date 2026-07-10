@@ -1,0 +1,105 @@
+Com base nos arquivos enviados, foi feito o estudo de engenharia reversa das interfaces dos quadros de nascimento (maternidade). As imagens dividem-se em dois padrões arquiteturais de layout: Vertical (Portrait) [cite: 480764265_1038802294940705_505125179880995543_n.jpg, 474068274_1017288683758733_4535733931231998714_n.jpg, 481906963_8928463477280612_919914492726057210_n.jpg, 480576296_1038802238274044_9080377969270690343_n.jpg] e Horizontal (Landscape).Abaixo está o mapeamento completo dos elementos, fontes, ícones e a estrutura do dataset pronta para o seu desenvolvedor alimentar um modelo de Visão Computacional (como YOLO ou COCO JSON).📐 Estudo Anatômico do Layout (UI Parsing)1. Divisão de Grades (Grid System)Padrão Vertical: O topo contém o nome do bebê [cite: 480764265_1038802294940705_505125179880995543_n.jpg, 474068274_1017288683758733_4535733931231998714_n.jpg, 481906963_8928463477280612_919914492726057210_n.jpg, 480576296_1038802238274044_9080377969270690343_n.jpg]. O centro abriga a foto principal [cite: 480764265_1038802294940705_505125179880995543_n.jpg, 474068274_1017288683758733_4535733931231998714_n.jpg, 481906963_8928463477280612_919914492726057210_n.jpg, 480576296_1038802238274044_9080377969270690343_n.jpg]. As laterais (ou base) organizam os dados de nascimento em caixas delimitadas por linhas tracejadas (Data, Peso, Comprimento, Hora) [cite: 480764265_1038802294940705_505125179880995543_n.jpg, 474068274_1017288683758733_4535733931231998714_n.jpg, 481906963_8928463477280612_919914492726057210_n.jpg, 480576296_1038802238274044_9080377969270690343_n.jpg].Padrão Horizontal: O topo esquerdo destaca o nome. A metade esquerda organiza a grade de dados e informações dos pais/avós. A metade direita foca exclusivamente na foto do bebê em formato retangular ou oval decorado.2. Mapeamento de Fontes (Typography)Nome do Bebê: Fonte Script/Cursiva elegante de alta caligrafia (Ex: Great Vibes, Allura ou Ballroom Waltz) [cite: 480764265_1038802294940705_505125179880995543_n.jpg, 474068274_1017288683758733_4535733931231998714_n.jpg, 481906963_8928463477280612_919914492726057210_n.jpg, 480576296_1038802238274044_9080377969270690343_n.jpg, 480784361_8928463647280595_5008456835023824387_n.jpg, 481260684_8928463557280604_8851400564529332651_n.jpg, 481098180_8928463610613932_6848267809708096310_n.jpg].Números de Destaque (Métricas): Fonte de Peso Extra-Bold/Stencil estilizada com serifas geométricas marcantes.Dados dos Pais/Família: Fonte cursiva secundária mais fina ou Sans-Serif limpa para facilitar a leitura em tamanhos menores [cite: 480764265_1038802294940705_505125179880995543_n.jpg, 474068274_1017288683758733_4535733931231998714_n.jpg, 481906963_8928463477280612_919914492726057210_n.jpg, 480576296_1038802238274044_9080377969270690343_n.jpg, 480784361_8928463647280595_5008456835023824387_n.jpg, 481260684_8928463557280604_8851400564529332651_n.jpg, 481098180_8928463610613932_6848267809708096310_n.jpg].3. Dicionário de Ícones e Elementos GráficosElemento VisualSignificado do ElementoTipo de Gráfico AssociadoBalança de Cozinha/MesaPeso de nascimento (Kg/g) [cite: 480764265_1038802294940705_505125179880995543_n.jpg, 474068274_1017288683758733_4535733931231998714_n.jpg, 481906963_8928463477280612_919914492726057210_n.jpg, 480576296_1038802238274044_9080377969270690343_n.jpg, 480784361_8928463647280595_5008456835023824387_n.jpg, 481260684_8928463557280604_8851400564529332651_n.jpg, 481098180_8928463610613932_6848267809708096310_n.jpg]Vetor Colorido FlatRégua EscolarComprimento/Altura (cm) [cite: 480764265_1038802294940705_505125179880995543_n.jpg, 474068274_1017288683758733_4535733931231998714_n.jpg, 481906963_8928463477280612_919914492726057210_n.jpg, 480576296_1038802238274044_9080377969270690343_n.jpg, 480784361_8928463647280595_5008456835023824387_n.jpg, 481260684_8928463557280604_8851400564529332651_n.jpg, 481098180_8928463610613932_6848267809708096310_n.jpg]Vetor Linear / IsométricoDespertador / RelógioHora exata do parto [cite: 480764265_1038802294940705_505125179880995543_n.jpg, 474068274_1017288683758733_4535733931231998714_n.jpg, 481906963_8928463477280612_919914492726057210_n.jpg, 480576296_1038802238274044_9080377969270690343_n.jpg, 480784361_8928463647280595_5008456835023824387_n.jpg, 481260684_8928463557280604_8851400564529332651_n.jpg, 481098180_8928463610613932_6848267809708096310_n.jpg]Ilustração Digital CircularCoração com Cruz MédicaHospital / Maternidade (Ex: HCM) [cite: 480764265_1038802294940705_505125179880995543_n.jpg, 474068274_1017288683758733_4535733931231998714_n.jpg, 481906963_8928463477280612_919914492726057210_n.jpg, 480576296_1038802238274044_9080377969270690343_n.jpg, 480784361_8928463647280595_5008456835023824387_n.jpg, 481260684_8928463557280604_8851400564529332651_n.jpg, 481098180_8928463610613932_6848267809708096310_n.jpg]Emblema Vetorial SólidoIlustrações ClipartElementos decorativos (Crianças, Bebês Poderosos, Girassóis) [cite: 480764265_1038802294940705_505125179880995543_n.jpg, 474068274_1017288683758733_4535733931231998714_n.jpg, 481906963_8928463477280612_919914492726057210_n.jpg, 480784361_8928463647280595_5008456835023824387_n.jpg, 481260684_8928463557280604_8851400564529332651_n.jpg, 481098180_8928463610613932_6848267809708096310_n.jpg]PNGs Transparentes Externos💾 Dataset Estruturado para o Desenvolvedor (JSON)Copie o código abaixo e salve como birth_announcement_dataset.json. Ele mapeia as classes exatas baseadas nas imagens fornecidas para que o algoritmo aprenda a processar as posições e proporções relativas (bounding_boxes padronizadas em canvas 1000x1000 para facilitar o cálculo do programador):JSON{
+  "dataset_metadata": {
+    "task": "UI Element Detection & Birth Frame Parsing",
+    "classes": [
+      "baby_name", "baby_photo_container", "data_box", "peso_box", 
+      "comprimento_box", "hora_box", "parentesco_box", "hospital_badge", "decoracao"
+    ]
+  },
+  "templates": [
+    {
+      "template_id": "T001_PORTRAIT_GRID",
+      "verified_files": ["480764265_n.jpg", "474068274_n.jpg", "481906963_n.jpg", "480576296_n.jpg"],
+      "canvas_proportions": { "width": 1000, "height": 1333 },
+      "annotations": [
+        {
+          "class": "baby_name",
+          "bbox_normalized": { "center_x": 0.50, "center_y": 0.10, "width": 0.70, "height": 0.12 },
+          "font_style": { "type": "cursive_script", "alignment": "center" }
+        },
+        {
+          "class": "baby_photo_container",
+          "bbox_normalized": { "center_x": 0.50, "center_y": 0.45, "width": 0.45, "height": 0.50 },
+          "properties": { "corner_radius": "rounded_rect" }
+        },
+        {
+          "class": "data_box",
+          "bbox_normalized": { "center_x": 0.18, "center_y": 0.32, "width": 0.25, "height": 0.18 },
+          "contains_icon": false
+        },
+        {
+          "class": "peso_box",
+          "bbox_normalized": { "center_x": 0.18, "center_y": 0.58, "width": 0.25, "height": 0.18 },
+          "contains_icon": true,
+          "icon_type": "scale_icon"
+        },
+        {
+          "class": "comprimento_box",
+          "bbox_normalized": { "center_x": 0.82, "center_y": 0.32, "width": 0.25, "height": 0.18 },
+          "contains_icon": true,
+          "icon_type": "ruler_icon"
+        },
+        {
+          "class": "hora_box",
+          "bbox_normalized": { "center_x": 0.82, "center_y": 0.58, "width": 0.25, "height": 0.18 },
+          "contains_icon": true,
+          "icon_type": "clock_icon"
+        },
+        {
+          "class": "parentesco_box",
+          "bbox_normalized": { "center_x": 0.50, "center_y": 0.78, "width": 0.85, "height": 0.15 },
+          "font_style": { "type": "script_or_serif" }
+        },
+        {
+          "class": "hospital_badge",
+          "bbox_normalized": { "center_x": 0.50, "center_y": 0.92, "width": 0.30, "height": 0.10 },
+          "icon_type": "heart_cross"
+        }
+      ]
+    },
+    {
+      "template_id": "T002_LANDSCAPE_SPLIT",
+      "verified_files": ["480784361_n.jpg", "481260684_n.jpg", "481098180_n.jpg"],
+      "canvas_proportions": { "width": 1000, "height": 707 },
+      "annotations": [
+        {
+          "class": "baby_name",
+          "bbox_normalized": { "center_x": 0.32, "center_y": 0.18, "width": 0.55, "height": 0.16 },
+          "font_style": { "type": "cursive_script", "alignment": "left" }
+        },
+        {
+          "class": "baby_photo_container",
+          "bbox_normalized": { "center_x": 0.76, "center_y": 0.50, "width": 0.42, "height": 0.80 },
+          "properties": { "corner_radius": "wavy_or_rounded_rect" }
+        },
+        {
+          "class": "data_box",
+          "bbox_normalized": { "center_x": 0.14, "center_y": 0.42, "width": 0.20, "height": 0.22 }
+        },
+        {
+          "class": "hora_box",
+          "bbox_normalized": { "center_x": 0.34, "center_y": 0.42, "width": 0.16, "height": 0.22 },
+          "contains_icon": true
+        },
+        {
+          "class": "comprimento_box",
+          "bbox_normalized": { "center_x": 0.51, "center_y": 0.42, "width": 0.14, "height": 0.22 },
+          "contains_icon": true
+        },
+        {
+          "class": "peso_box",
+          "bbox_normalized": { "center_x": 0.14, "center_y": 0.65, "width": 0.20, "height": 0.18 },
+          "contains_icon": true
+        },
+        {
+          "class": "parentesco_box",
+          "bbox_normalized": { "center_x": 0.34, "center_y": 0.82, "width": 0.50, "height": 0.20 }
+        },
+        {
+          "class": "hospital_badge",
+          "bbox_normalized": { "center_x": 0.52, "center_y": 0.65, "width": 0.14, "height": 0.18 }
+        }
+      ]
+    }
+  ]
+}
